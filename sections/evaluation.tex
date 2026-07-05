@@ -1,0 +1,83 @@
+\section{Evaluation}
+
+The Evaluation Section presents a comprehensive analysis of the dataset, addressing key research questions through both descriptive and inferential statistical methods. It includes data visualization, statistical summaries, and hypothesis testing to extract meaningful insights and support data-driven conclusions using the methods we used in the previous section.
+
+\subsection{Descriptive Analysis}
+\subsubsection{Age Restrictions}
+
+The bar plot in \textbf{Figure~\ref{fig:mean_age}} reveals that Netflix has a higher mean content age compared to Disney+, suggesting a catalog rich in older titles that appeal to a mature audience. In contrast, Disney+ has a lower mean age, indicating a focus on newer releases consistent with its family-friendly branding. However, this alone does not capture the full nuances of their offerings.
+
+The box plot in \textbf{Figure~\ref{fig:box_age}} provides a more detailed view. Netflix's higher median content age and broad interquartile range highlight its diverse catalog, spanning both new and older titles, appealing to a wide demographic with a strong emphasis on adult viewership. Disney+ exhibits a lower median age and narrower interquartile range, reflecting its focus on recent productions aimed at younger audiences. Yet, outliers such as older Star Wars and Marvel titles show that Disney+ also appeals to older viewers.
+
+The mosaic plot in \textbf{Figure~\ref{fig:mosaic_age}} further emphasizes the difference in age ratings between the platforms. Netflix primarily features content rated for ages 7 and above, aligning with its adult-oriented strategy. Disney+ balances its offerings, with a significant share of 0-7 rated content targeting families and younger audiences, while its 7+ content caters to older viewers through major franchises.
+
+Together, these plots provide a comprehensive understanding of how each platform positions its content to attract distinct audience segments. Netflix's dominance in mature content complements Disney+'s balanced strategy, engaging both children and older viewers.
+
+\subsubsection{Rotten Tomatoes Scores}
+
+\textbf{Figure~\ref{fig:mean_tomato} and \ref{fig:box_tomato}} show that both platforms maintain high average Rotten Tomatoes scores, with Netflix having slightly more variability. From \textbf{Figure~\ref{fig:mean_tomato}}, we observe that the mean scores are comparable, indicating that both platforms aim to deliver quality content. However, \textbf{Figure~\ref{fig:box_tomato}} provides deeper insights: Netflix's broader interquartile range (IQR) and more frequent outliers suggest a diverse catalog that includes both critically acclaimed and lower-rated titles. Disney+, on the other hand, displays a narrower IQR with fewer outliers, signaling a more consistent focus on well-received content.
+
+\textbf{Figure~\ref{fig:ridgeline}} complements this by illustrating the density of scores across the two platforms. Netflix shows a multi-modal distribution with peaks spread over a wider range of scores, reflecting its varied content offering. This aligns with its strategy to cater to a broad audience, providing content across multiple genres and quality levels. Conversely, Disney+ exhibits a more unimodal and concentrated distribution, emphasizing its commitment to maintaining consistently high-quality content, likely to appeal to families and younger audiences.
+
+Additionally, \textbf{Figure~\ref{fig:scatter}} reinforces the understanding of score variability and clustering. The scatter plot clearly shows Netflix's wider spread of scores, confirming the platform's diverse quality range. The jitter reveals clusters of highly rated content but also highlights the presence of lower-rated titles. Disney+ presents tightly clustered scores around its higher ratings, affirming its strategy to minimize variability and focus on consistently well-rated content.
+
+\subsection{Inferential Analysis}
+\subsubsection{Age Restrictions: Hypothesis Test}
+
+To evaluate whether there is a significant difference in the ages of movies available on Netflix and Disney+, we conducted the \textbf{Mann-Whitney U test} (refer to \autoref{appendix:mann}). This test was selected because the age data did not meet the assumption of normality, that's why t-test hasn't been used \cite{student1908}, as determined by the results of the Shapiro-Wilk and Kolmogorov-Smirnov tests (refer to \autoref{appendix:shapiro} and \autoref{appendix:kolmogorov}). 
+
+\subsection*{Normality Tests}
+For introduction to P-value refer to \autoref{appendix:pvalue}.
+\begin{enumerate}
+    \item \textbf{Shapiro-Wilk Test}:
+    \begin{itemize}
+        \item \textbf{Statistic}: 0.891
+        \item \textbf{p-value}: 0.000
+    \end{itemize}
+    The p-value is less than 0.05, indicating that the data is not normally distributed.
+
+    \item \textbf{Kolmogorov-Smirnov Test}:
+    \begin{itemize}
+        \item \textbf{Statistic}: 0.900
+        \item \textbf{p-value}: 0.000
+    \end{itemize}
+    Similarly, the p-value is less than 0.05, confirming that the data deviates from normality.
+\end{enumerate}
+
+\subsection*{Mann-Whitney U Test}
+Given the non-normality of the data, we applied the Mann-Whitney U test to compare the distributions of movie ages between Netflix and Disney+.
+\begin{itemize}
+    \item \textbf{Null Hypothesis} (\(H_0\)): The distributions of movie ages for Netflix and Disney+ are identical.
+    \item \textbf{Alternative Hypothesis} (\(H_1\)): The distributions of movie ages for Netflix and Disney+ differ.
+\end{itemize}
+
+The test produced the following results:
+\begin{itemize}
+    \item \textbf{U-statistic}: 2,592,969.0
+    \item \textbf{p-value}: \(2.52 \times 10^{-134}\)
+\end{itemize}
+
+\subsection*{Interpretation}
+Since the p-value is significantly less than 0.05, we reject the null hypothesis. This indicates a \textbf{statistically significant difference} in the age distribution of movies between Netflix and Disney+. These findings suggest that Netflix tends to offer older content compared to Disney+, which aligns with the platform's broader content strategy, while Disney+ focuses more on newer releases.
+
+The \textbf{mean rank for Netflix} is \textbf{2549.75}, and for \textbf{Disney+}, it is \textbf{1344.17}. These values are calculated by ranking all movie ages from both platforms together and then averaging the ranks within each group. A higher mean rank for Netflix indicates that its movie ages are generally ranked higher, reflecting older content compared to Disney+.
+
+A \textbf{statistically significant difference} means that the observed difference between two groups (in this case, the ages of movies on Netflix and Disney+) is unlikely to have occurred by random chance. In hypothesis testing, this conclusion is based on the \textbf{p-value}:
+
+\begin{itemize}
+    \item \textbf{P-value $<$ 0.05}: The difference is statistically significant. We reject the null hypothesis (\(H_0\)), which posits that the distributions of the two groups are the same.
+    \item \textbf{P-value $\geq$ 0.05}: The difference is not statistically significant. We fail to reject the null hypothesis, meaning any observed difference could be due to chance.
+\end{itemize}
+
+In practical terms, a statistically significant difference suggests that the two platforms have genuinely different movie age distributions, and this difference is not just a result of random variation in the data. However, \textbf{statistical significance} does not necessarily imply that the difference is large or important in a real-world context—it simply indicates that the difference is unlikely to be due to random chance alone.
+
+\subsubsection{Rotten Tomatoes Scores: Hypothesis Test}
+To compare the Rotten Tomatoes scores between Netflix and Disney+, we conducted a \textbf{Mann-Whitney U test}. This test was chosen because the scores did not meet the assumption of normality. The test yielded a \textbf{U-statistic of 1,418,549.0} and a \textbf{p-value of \(3.58 \times 10^{-15}\)}, indicating a \textbf{statistically significant difference} between the two platforms.
+
+To determine which platform generally had higher scores, we compared the \textbf{mean ranks}:
+\begin{itemize}
+    \item \textbf{Netflix}: 2231.91
+    \item \textbf{Disney+}: 2617.94
+\end{itemize}
+
+The higher mean rank for Disney+ suggests that, on average, its content receives better a slightly better Rotten Tomatoes scores compared to Netflix. This aligns with Disney+'s focus on maintaining a curated, high-quality catalog.
