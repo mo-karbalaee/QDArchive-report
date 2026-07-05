@@ -35,46 +35,43 @@
 \pagestyle{fancy}
 \fancyhf{}
 \fancyfoot[C]{\thepage}
+
 \begin{document}
 
-\begin{center}
+\begin{titlepage}
+\thispagestyle{empty}
+\centering
 
-\begin{center}
 \begin{minipage}{\textwidth}
+\centering
 \includegraphics[height=3cm]{res/oss-fau.png}
 \hfill
 \includegraphics[height=1.5cm]{res/fau-techfak.png}
 \end{minipage}
-\end{center}
 
-\vspace{1cm}
+\vfill
 
-{\LARGE\textbf{Content Comparison: How Disney+ and Netflix Differ in Age Ratings and Quality}}
+\rule{\textwidth}{0.6pt}\\[0.6cm]
+{\Huge\bfseries Applied Software Engineering Project for AI}\\[0.4cm]
+{\LARGE Seeding QDArchive}\\[0.6cm]
+\rule{\textwidth}{0.6pt}
 
-\vspace{0.5cm}
+\vfill
 
-\rule{\textwidth}{0.4pt}
+\renewcommand{\arraystretch}{1.8}
+\begin{tabular}{r @{\hspace{1.5cm}} l}
+\large\textbf{Author} & \large Mohammad Karbalaee \\
+\large\textbf{Supervisor} & \large Prof. Dr. Dirk Riehle \\
+\large\textbf{Lab} & \large Professorship for Open Source Software \\
+\large\textbf{Semester} & \large Summer 2026 \\
+\large\textbf{Date} & \large \today \\
+\end{tabular}
 
-\vspace{0.4cm}
+\vfill
 
-\large
-Mohammad Karbalaee
+\end{titlepage}
 
-\vspace{0.2cm}
-
-Semester: Summer 2026 \\
-Supervisor: Prof. Dr. Dirk Riehle \\
-\today
-
-\vspace{0.4cm}
-
-\rule{\textwidth}{0.4pt}
-\end{center}
-
-\begin{abstract}
-Placeholder
-\end{abstract}
-\vspace{1cm}
+\newpage
 \tableofcontents
 \newpage
 \input{sections/introduction}
