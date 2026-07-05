@@ -1,3 +1,31 @@
-\appendix
 \section{Database Aggregation}
 
+In order to conduct a comprehensive analysis of the data acquired during the data acquisition phase, and to gain a thorough understanding of the other students' findings, I aggregated my database with the databases of 39 other students, resulting in a combined dataset of 40 databases. The following table lists the student IDs of the databases included in this aggregation:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{ccccc}
+23025313 & 23025328 & 23041405 & 23047806 & 23071063 \\
+23071082 & 23079239 & 23079506 & 23080363 & 23082320 \\
+23084716 & 23100834 & 23123639 & 23129103 & 23129118 \\
+23129194 & 23135689 & 23148157 & 23158572 & 23158587 \\
+23173040 & 23206422 & 23220843 & 23221189 & 23240175 \\
+23262136 & 23273412 & 23277555 & 23293505 & 23293539 \\
+23308310 & 23359384 & 23365366 & 23453618 & 23455702 \\
+23514826 & 23711815 & 23726011 & 23727550 &  \\
+\end{tabular}
+\end{center}
+
+Since we all followed a shared schema, the aggregation process went smoothly. However, several challenges did arise, which I discuss in the following subsections.
+
+\subsection{Deduplication}
+
+The 40 source databases were built independently by different students, each pulling from the same pool of public data repositories (Zenodo, Dryad, Harvard Dataverse, ICPSR, and others). Because several students' searches overlapped, many of the same underlying research projects were captured more than once across the collected databases — sometimes with slightly different metadata, since each student's ingestion process handled things a little differently.
+
+To resolve this, every project record was checked against the ones already merged, using a three-tier matching strategy applied in order of reliability: first by its project URL (normalized for trivial formatting differences like a trailing slash or letter case), then, if no URL was available or matched, by its DOI, and finally, if neither was usable, by the combination of title and source repository. This fallback chain was necessary because metadata completeness varied across sources — not every record had a DOI, and not every URL was formatted consistently.
+
+When two records were identified as the same project, they were not simply deduplicated by discarding one copy. Instead, their information was combined: any field one copy was missing (e.g. a description or language) was filled in from the other if available, and all associated files, keywords, authors, and license entries from both copies were merged into a single unified set, with exact repeats (e.g. the same file name appearing in both) collapsed into one entry.
+
+The result is a single database in which each real-world project appears exactly once, retaining the most complete metadata available across all the sources that happened to include it.
+
+\subsection{Data Correction}
