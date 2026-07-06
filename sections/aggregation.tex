@@ -28,4 +28,89 @@ When two records were identified as the same project, they were not simply dedup
 
 The result is a single database in which each real-world project appears exactly once, retaining the most complete metadata available across all the sources that happened to include it.
 
-\subsection{Data Correction}
+\subsection{Data Quality Remediation}
+
+After aggregating multiple student databases into a single database following a shared class schema, a various inconsistencies appeared due to low quality data of some of those databases. Because each database was built separately, values that should conform to the same fixed categories were recorded inconsistently across sources. When the merged database was validated against the required schema---specifically, mandatory fields and the defined value sets for \textit{download method}, \textit{file download status}, and \textit{contributor role}---a substantial number of records failed validation.
+
+\subsubsection{Issues Identified}
+Validation surfaced five categories of problems:
+\begin{itemize}
+    \item A small number of records (4) contained no genuine project data---placeholder or test entries with no identifying title, URL, or DOI.
+    \item 711 projects were missing their canonical project URL, despite having a valid DOI recorded elsewhere on the same record.
+    \item Approximately 49{,}000 records used non-standard labels for \textit{download method} (e.g., ``API'' and ``api'' instead of the defined category), reflecting differences in how individual source databases recorded this field rather than genuinely new categories.
+    \item Approximately 63{,}000 file records used non-standard status labels for the same reason.
+    \item A small number of contributor-role entries (1{,}188) used inconsistent capitalization, 57 records were missing a required timestamp, and one record was found to be missing its description entirely.
+\end{itemize}
+
+\subsubsection{Resolution Approach}
+Each issue was addressed according to its underlying cause rather than through a uniform rule. Records with no genuine identifying information were removed. Where a valid alternative identifier existed on the record (a DOI), it was used to populate the missing URL field. Where the same underlying value had simply been recorded under different labels across sources, these were consolidated to the schema's defined categories. Where a required value was genuinely absent and could not be recovered from elsewhere in the record, a clearly identifiable placeholder was applied so the gap remains traceable rather than being disguised as genuine data. The single missing description is being completed manually, as it requires domain judgment rather than a mechanical fix.
+
+
+\subsection{Final Database}
+
+The final aggregated database contains 89{,}658 unique projects collected from the 40 merged student databases. Together, these projects are associated with over one million files, approximately 866{,}000 keywords, more than 250{,}000 contributor-role assignments, and over 82{,}000 license records. Following deduplication and data quality remediation, the database conforms to the shared schema and serves as the foundation for the analyses presented in the remainder of this report.
+
+\begin{table}[ht]
+\centering
+\caption{Size of the final aggregated database.}
+\label{tab:aggregated-dataset}
+\begin{tabular}{lr}
+\toprule
+\textbf{Entity} & \textbf{Count} \\
+\midrule
+Projects            & 89{,}658 \\
+Files               & 1{,}005{,}361 \\
+Keywords            & 866{,}212 \\
+Contributor Roles   & 250{,}373 \\
+Licenses            & 82{,}441 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Since our analysis is per repository, it's important to know which 
+repositories have been analyzed and what is their frequncy distribution accross the database. 
+
+\begin{table}[ht]
+\centering
+\caption{Distribution of projects by source repository in the aggregated database.}
+\label{tab:repository-distribution}
+\begin{tabular}{lr}
+\toprule
+\textbf{Repository} & \textbf{Projects} \\
+\midrule
+1. Zenodo                                   & 51{,}426 \\
+10. Harvard Dataverse                        & 12{,}921 \\
+5. DANS                                     & 6{,}973 \\
+2. Dryad                                    & 4{,}652 \\
+16. Open Data Uni Halle                      & 3{,}372 \\
+11. Finnish Social Science Data Archive      & 2{,}969 \\
+3. UK Data Service                          & 1{,}530 \\
+4. Syracuse Qualitative Data Repository     & 1{,}286 \\
+20. SIKT                                     & 950 \\
+13. CESSDA                                   & 648 \\
+15. ICPSR                                    & 530 \\
+7. ADA                                      & 472 \\
+18. Harvard Murray Archive                   & 422 \\
+6. DataverseNO                              & 414 \\
+19. Columbia Oral History Archive            & 327 \\
+9. HIHSN                                    & 322 \\
+8. SADA                                     & 225 \\
+17. N/A                                      & 125 \\
+12. AUSSDA                                   & 94 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \includesvg[width=10cm]{res/repository_pie} 
+    \caption{Pie chart of top 7 most common repositories in the aggregated database.}
+    \label{fig:repo_pie}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includesvg[width=10cm]{res/repository_histogram} 
+    \caption{Histogram of project distributions per repository}
+    \label{fig:repo_histogram}
+\end{figure}
