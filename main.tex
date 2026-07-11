@@ -1,41 +1,68 @@
-\documentclass[a4paper, 11pt]{article}
-\usepackage{graphicx}
-\usepackage{amsmath}
-\usepackage{hyperref}
-\usepackage{geometry}
-\geometry{margin=1in}
+\documentclass[a4paper,11pt]{article}
+
+% --- Encoding & fonts ---
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+
+% --- Layout ---
+\usepackage[margin=1in]{geometry}
 \usepackage{setspace}
 \usepackage{titlesec}
 \usepackage{fancyhdr}
-\usepackage{svg}
-\usepackage{booktabs} 
-\usepackage{cite}
+\usepackage{enumitem}
+
+% --- Graphics & tables ---
+\usepackage{graphicx}
+\usepackage[inkscapelatex=false]{svg}
 \usepackage{float}
+\usepackage{booktabs}
+\usepackage{caption}
 \usepackage{subcaption}
-\renewcommand{\headrulewidth}{0pt}
+\usepackage{xcolor}
+
+% --- Math & references ---
+\usepackage{amsmath}
+\usepackage{cite}
+\usepackage{hyperref}
+
+\definecolor{secink}{HTML}{1a3c5a}
+
 \hypersetup{
     colorlinks=true,
-    citecolor=blue,
     linkcolor=black,
-    urlcolor=blue,
-    pdfborder={0 0 0}
+    citecolor=secink,
+    urlcolor=secink,
+    pdfborder={0 0 0},
+    pdftitle={Seeding QDArchive},
+    pdfauthor={Mohammad Karbalaee},
+    pdfsubject={Applied Software Engineering Project for AI},
+    pdfkeywords={QDArchive, qualitative data, classification, ISIC Rev. 5}
 }
+
 \onehalfspacing
+\setlist{itemsep=2pt,topsep=4pt,parsep=0pt}
+\captionsetup{font=small,labelfont=bf}
+\captionsetup[sub]{font=small}
+
 \titleformat{\section}
-  {\normalfont\Large\bfseries}
-  {\thesection}
-  {1em}{}
+  {\normalfont\Large\bfseries\color{secink}}
+  {\thesection}{1em}{}
 \titleformat{\subsection}
-  {\normalfont\large\bfseries}
-  {\thesubsection}
-  {1em}{}
+  {\normalfont\large\bfseries\color{secink}}
+  {\thesubsection}{1em}{}
 \titleformat{\subsubsection}
   {\normalfont\normalsize\bfseries}
-  {\thesubsubsection}
-  {1em}{}
+  {\thesubsubsection}{1em}{}
+
 \pagestyle{fancy}
 \fancyhf{}
+\fancyhead[L]{\nouppercase{\small\leftmark}}
+\fancyhead[R]{\small Seeding QDArchive}
 \fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
 
 \begin{document}
 
@@ -47,29 +74,49 @@
 
 \vfill
 
-\rule{\textwidth}{0.8pt}\\[0.6cm]
-{\Huge\bfseries Seeding QDArchive}\\[0.4cm]
-{\LARGE Applied Software Engineering Project for AI}\\[0.6cm]
-\rule{\textwidth}{0.8pt}
+\rule{\textwidth}{1pt}\\[0.5cm]
+{\Huge\bfseries Seeding QDArchive}\\[0.35cm]
+{\LARGE Applied Software Engineering Project for AI}\\[0.5cm]
+\rule{\textwidth}{1pt}
 
 \vfill
 
-\renewcommand{\arraystretch}{1.8}
+{\large
+\renewcommand{\arraystretch}{1.7}
 \begin{tabular}{r @{\hspace{1.5cm}} l}
-\large\textbf{Author} & \large Mohammad Karbalaee \\
-\large\textbf{Supervisor} & \large Prof. Dr. Dirk Riehle \\
-\large\textbf{Lab} & \large Professorship for Open Source Software \\
-\large\textbf{Semester} & \large Summer 2026 \\
-\large\textbf{Date} & \large \today \\
-\end{tabular}
+\textbf{Author} & Mohammad Karbalaee \\
+\textbf{Supervisor} & Prof. Dr. Dirk Riehle \\
+\textbf{Lab} & Professorship for Open Source Software \\
+\textbf{Semester} & Summer 2026 \\
+\textbf{Date} & \today \\
+\end{tabular}}
 
 \vfill
 
 \end{titlepage}
 
 \newpage
+\pagenumbering{roman}
+
+\begin{abstract}
+\noindent This report presents the data-classification phase of the Seeding
+QDArchive project. Forty independently collected student databases were
+aggregated into a single deduplicated corpus of 89{,}658 qualitative-research
+projects, harmonised against a shared schema. Each project was assigned a project
+type (QDA, QD, other, or non-project) derived from its file inventory, and
+classified against the ISIC Rev.~5 taxonomy at the division level using both
+file-level and metadata signals, with free-form tags generated to support search
+and discovery. The results are reported per source repository, covering
+project-type composition, primary-class distributions, and ranked class
+frequencies.
+\end{abstract}
+
 \tableofcontents
+
 \newpage
+\pagenumbering{arabic}
+
 \input{sections/aggregation}
 \input{sections/classification_results}
+
 \end{document}
